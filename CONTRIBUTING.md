@@ -2,69 +2,54 @@
 
 Thank you for your interest in contributing to Daily Notes Journal!
 
-This repository is currently a scaffold with no implementation code. To prepare for incoming contributions, we define baseline expectations for code quality, linting, and static analysis. Please follow these guidelines when adding code.
+This repository now contains a minimal Python FastAPI scaffold to enable dependency installation and preview startup. Please follow these guidelines when adding code.
 
 ## General Guidelines
 - Keep changes small and focused.
 - Include clear docstrings/comments for public functions, classes, and modules.
 - Avoid hard-coding configuration values; use environment variables and document them in a `.env.example` file.
 
-## Python Projects (if Python is chosen)
-- Use `pyproject.toml` to configure tools.
+## Python Project Tooling
+- Using `pyproject.toml` for configuration.
 - Recommended tools:
   - Formatter: `black`
-  - Import sorter: `isort`
-  - Linter: `ruff` (preferred) or `flake8`
+  - Linter: `ruff` (preferred)
   - Type checking: `mypy`
 - Suggested commands:
-  - Format: `black . && isort .`
-  - Lint: `ruff check .` (or `flake8`)
+  - Format: `black .`
+  - Lint: `ruff check .`
   - Types: `mypy .`
 - Suggested ruff rulesets: `E,F,I,UP,B,PT,RET,SIM,PL` (adjust as needed).
-- Minimum structure:
+- Structure:
   ```
   .
   ├─ src/
-  │  └─ app/__init__.py
+  │  └─ app/
+  │     ├─ __init__.py
+  │     └─ main.py
+  ├─ run.py
   ├─ tests/
   └─ pyproject.toml
   ```
 
-## Node.js/TypeScript Projects (if Node is chosen)
-- Use `package.json` to configure scripts and dev dependencies.
-- Recommended tools:
-  - Linter: `eslint` (with airbnb/base or standard config)
-  - Formatter: `prettier`
-  - Types: `typescript` + `tsc` (if TS)
-- Suggested scripts:
-  - `"lint": "eslint ."`
-  - `"format": "prettier --write ."`
-  - `"typecheck": "tsc --noEmit"`
-- Minimum structure:
-  ```
-  .
-  ├─ src/
-  │  └─ index.ts (or index.js)
-  ├─ tests/
-  ├─ tsconfig.json (if TS)
-  └─ .eslintrc.cjs
-  ```
+## Running Locally
+- Install dependencies: `pip install -e .[dev]`
+- Copy env: `cp .env.example .env` (optional)
+- Start server: `python run.py` (defaults to 0.0.0.0:8000)
 
 ## Continuous Integration
-- Set up CI to run on pushes and PRs:
-  - Python: run black (check), ruff, mypy, and tests.
-  - Node: run eslint, prettier (check), tsc (noEmit), and tests.
-- Fail the build on lint or type errors.
+- On pushes and PRs, run:
+  - `black --check .`
+  - `ruff check .`
+  - `mypy .`
+  - tests (`pytest`) when available
 
 ## Commit Conventions
 - Use meaningful commit messages.
 - Consider Conventional Commits (feat:, fix:, docs:, chore:, refactor:, test:, build:, ci:).
 
 ## Documentation
-- Keep `README.md` updated with:
-  - Project overview and goals.
-  - Setup steps.
-  - How to run the project and tests.
+- Keep `README.md` updated with setup and run instructions.
 - For public APIs, document endpoints, parameters, and responses.
 
 ## Environment Variables
@@ -73,4 +58,4 @@ This repository is currently a scaffold with no implementation code. To prepare 
 
 ## Security and Compliance
 - Do not commit secrets or API keys.
-- Run dependency audits (`pip-audit` or `npm audit`) periodically.
+- Run dependency audits (`pip-audit`) periodically.
